@@ -17,11 +17,15 @@ Route::get('/', function () {
         Route::get('/',[ComprasController::class, 'index']);
         Route::get('datatable', [ComprasController::class, 'datatable']);
         Route::get('crear',[ComprasController::class, 'create']);
-        Route::get('edit/{id}',[ComprasController::class, 'edit'] );
+        Route::get('editar/{id}',[ComprasController::class, 'editar'] );
         Route::post('store',[ComprasController::class, 'store']);
         Route::post('update',[ComprasController::class, 'update']);
         Route::get('destroy/{id}',[ComprasController::class, 'destroy']);
         Route::get('reporte',[ComprasController::class, 'reporte']);
+        Route::post('store_compra',[ComprasController::class, 'store_compra']);
+        Route::get('excel/{id}',[ComprasController::class, 'excel'] );
+
+
     });
 
     Route::prefix('proveedores')->group(function(){
@@ -172,3 +176,7 @@ Route::get('/clear-cache', function() {
 Route::any('/{page?}',function(){
     return View::make('pages.error-pages.error-404');
 })->where('page','.*');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

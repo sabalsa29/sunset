@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Productos;
 use Illuminate\Http\Request;
-
+use Alert;
 class ProductosController extends Controller
 {
     /**
@@ -13,7 +14,11 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        //
+        $productos  = Productos::all();
+        $tipo           = config('sistema.tipo_productos');
+        $categorias     = config('sistema.categorias');
+
+        return view('productos.index', compact('productos', 'tipo', 'categorias'));
     }
 
     /**
@@ -23,7 +28,10 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        $tipo           = config('sistema.tipo_productos');
+        $categorias     = config('sistema.categorias');
+
+        return view('productos.create', compact('tipo', 'categorias'));
     }
 
     /**
@@ -34,8 +42,19 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+
+        $producto               = new Productos();
+        $producto->tipo         = $request->tipo;
+        $producto->categoria    = $request->categoria_id;
+        $producto->descripcion  = $request->descripcion;
+        $producto->save();
+
+        Alert::success('Producto', 'Creado Correcto');
+        return redirect('productos');
     }
+
+
 
     /**
      * Display the specified resource.

@@ -1,39 +1,33 @@
 @extends('layout.master')
 
-@push('plugin-styles')
-@endpush
-
-
 @section('content')
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <a href ="proveedores/crear" class="btn btn-success" > Agregar Proveedor</a>
+            <a href ="productos/crear" class="btn btn-success" > Agregar Producto</a>
             <hr>
-            <h3 class="card-title">Proveedores</h3>
+            <h3 class="card-title">Productos</h3>
             <div class="table-responsive">
                 <hr>
-              <table class="table table-bordered">
+              <table class="table table-hover">
                 <thead>
                   <tr>
                     <th> Accion </th>
                     <th> Codigo</th>
-                    <th> Nombre </th>
-                    <th> Correo </th>
-                    <th> Telefono </th>
-                    <th> Domicilio </th>
+                    <th> Tipo </th>
+                    <th> Categoria </th>
+                    <th> Descripcion </th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($proveedores as $proveedor)
+                    @foreach ($productos as $producto)
                   <tr>
                     <td> </td>
-                    <td> {{ $proveedor->codigo }}</td>
-                    <td> {{ $proveedor->nombre }}</td>
-                    <td> {{ $proveedor->email }}</td>
-                    <td> {{ $proveedor->telefono }}</td>
-                    <td> {{ $proveedor->domicilio }}</td>
+                    <td> {{ $producto->codigo }}</td>
+                    <td> {{ $tipo[$producto->tipo] }}</td>
+                    <td> {{ $categorias[$producto->categoria] }}</td>
+                    <td> {{ $producto->descripcion }}</td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -8,34 +8,30 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-                {!! Form::open(['url'=>'proveedores/store','class'=>'form-horizontal','role'=>'form']) !!}
+                {!! Form::open(['url'=>'productos/store','class'=>'form-horizontal','role'=>'form']) !!}
                     <div class="form-group row col-lg-3" >
-                       <h4>Nuevo Proveedor</h4>
+                       <h4>Nuevo Producto</h4>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+
+                        {!! Form::label('Tipo : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
+                        <div class="col-lg-5">
+                        {!! Form::select('tipo',$tipo,null,['class'=>'form-select', 'required','placeholder'=>'Selecciona Tipo']) !!}
+                        </div>
+                        {!! Form::label('Categoria:', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
+                        <div class="col-lg-5">
+                        {!! Form::select('categoria_id',$categorias,null,['class'=>'form-select', 'required','placeholder'=>'Selecciona Categoria']) !!}
+                        </div>
                     </div>
                     <div class="form-group row ">
-                        {!! Form::label('Nombre : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
-                        <div class="col-lg-11">
-                            {!! Form::text('nombre',null,array( 'class' => 'form-control', 'required')) !!}
+                        {!! Form::label('Descripcion : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-2 col-form-label')) !!}
+                        <div class="col-lg-10">
+                            {!! Form::text('descripcion',null,array( 'class' => 'form-control', 'required')) !!}
                         </div>
-                    </div>
-                    <div class="form-group row ">
-                        {!! Form::label('Correo : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
-                        <div class="col-lg-6">
-                            {!! Form::email('correo',null,array( 'class' => 'form-control', 'required')) !!}
-                        </div>
-                        {!! Form::label('Telefono : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
-                        <div class="col-lg-4">
-                            {!! Form::text('telefono',null,array( 'class' => 'form-control', 'required','placeholder' => 'Numero Contacto', 'onkeypress'=>"return validNumero(event);")) !!}
-                        </div>
-                    </div><div class="form-group row ">
 
                     </div>
-                    <div class="form-group row ">
-                        {!! Form::label('Domicilio : ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-1 col-form-label')) !!}
-                        <div class="col-lg-11">
-                            {!! Form::text('domicilio',null,array( 'class' => 'form-control', 'required')) !!}
-                        </div>
-                    </div>
+
                     <br>
                     <a href="/compras" title="Asignaciones" class="btn btn-light"><i class="mdi mdi-keyboard-backspace"></i> Regresar</a>
                     <button  type="submit" class="btn btn-success float-right" id="btn-save-event" > <i class="mdi mdi-content-save"></i> Guardar </button>

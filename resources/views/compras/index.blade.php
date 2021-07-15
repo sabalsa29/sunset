@@ -8,104 +8,77 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <a href ="compras/crear" class="btn btn-success" > Agregar Movimiento</a>
+            {!! Html::link('#','Agregar Programacion',array('class'=>"btn btn-primary ripple m-1 ",'style'=>'margin-bottom:40px', 'data-toggle' => 'modal', 'data-target' => '#modalAddCompra'))!!}
+
             <hr>
             <h4 class="card-title">Compras</h4>
+
             <div class="table-responsive">
-                <hr>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th> Accion </th>
-                    <th> Fecha </th>
-                    <th> Proveedor </th>
-                    <th> Producto </th>
-                    <th> Cantidad </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td> 1 </td>
-                    <td> Herman Beck </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $ 77.99 </td>
-                    <td> May 15, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 2 </td>
-                    <td> Messsy Adam </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $245.30 </td>
-                    <td> July 1, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 3 </td>
-                    <td> John Richards </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $138.00 </td>
-                    <td> Apr 12, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 4 </td>
-                    <td> Peter Meggik </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $ 77.99 </td>
-                    <td> May 15, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 5 </td>
-                    <td> Edward </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $ 160.25 </td>
-                    <td> May 03, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 6 </td>
-                    <td> John Doe </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $ 123.21 </td>
-                    <td> April 05, 2015 </td>
-                  </tr>
-                  <tr>
-                    <td> 7 </td>
-                    <td> Henry Tom </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td> $ 150.00 </td>
-                    <td> June 16, 2015 </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            <th> Accion </th>
+                            <th> Fecha Del</th>
+                            <th> Fecha Hasta   </th>
+                            <th> Comentario </th>
+                            <th> Estatus </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($compras as $compra)
+                                <tr>
+                                    <td><a href="compras/editar/{{ Hashids::encode($compra->id) }}"> <i class="mdi mdi-folder"></i> </a>
+                                        <a href="compras/excel/{{ Hashids::encode($compra->id) }}"> <i class="mdi mdi-file-excel"></i> </a>
+                                    </td>
+                                    <td>{{$compra->fecha_del  }}</td>
+                                    <td>{{$compra->fecha_hasta  }}</td>
+                                    <td>{{$compra->comentario  }}</td>
+                                    <td>{{$compra->estatus  }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
             </div>
           </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAddCompra" role="dialog" aria-labelledby="modalAddCompra">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #f5f5f5">
+            <h4 class="modal-title" id="myModalLabel">Agregar Semana</h4>
+          <button type="button" class="close rigth " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        {!! Form::open(array('url' => 'compras/store_compra','class'=>'form-horizontal','role'=>'form')) !!}
+
+            <div class="modal-body">
+                <div class="form-group row ">
+                    {!! Form::label('Fecha del: ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-2 col-form-label')) !!}
+                    <div class="col-lg-4">
+                    {!! Form::date('fecha_del',$fecha = Date::now(),array('id'=>'fecha', 'class' => 'form-control', 'required')) !!}
+                    </div>
+                    {!! Form::label('Fecha hasta: ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-2 col-form-label')) !!}
+                    <div class="col-lg-4">
+                    {!! Form::date('fecha_hasta',$fecha = Date::now(),array('id'=>'fecha', 'class' => 'form-control', 'required')) !!}
+                    </div>
+                </div>
+                <div class="form-group row ">
+                    {!! Form::label('Comentarios: ', null ,array('class'=>'ul-form__label ul-form--margin col-lg-2 col-form-label')) !!}
+                    <div class="col-lg-10">
+                    {!! Form::text('comentario',null,array('id'=>'fecha', 'class' => 'form-control')) !!}
+                    </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+            <button type="submit" class="btn btn-success"  id="", secure = null> <i class="fa fa-floppy-o" aria-hidden="true" ></i> Guardar</button>
+          </div>
+        {!! Form::close()!!}
+      </div>
     </div>
 </div>
 @endsection
