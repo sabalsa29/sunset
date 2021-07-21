@@ -1,58 +1,65 @@
 <?php
-
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\HomeController;
+
+Auth::routes();
+Route::get('/', 'HomeController@root');
+Route::group(['middleware' => ['auth']], function () {
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('compras')->group(function(){
+    Route::get('/',[ComprasController::class, 'index']);
+    Route::get('datatable', [ComprasController::class, 'datatable']);
+    Route::get('crear',[ComprasController::class, 'create']);
+    Route::get('editar/{id}',[ComprasController::class, 'editar'] );
+    Route::post('store',[ComprasController::class, 'store']);
+    Route::post('update',[ComprasController::class, 'update']);
+    Route::get('destroy/{id}',[ComprasController::class, 'destroy']);
+    Route::get('reporte',[ComprasController::class, 'reporte']);
+    Route::post('store_compra',[ComprasController::class, 'store_compra']);
+    Route::get('excel/{id}',[ComprasController::class, 'excel'] );
+    Route::post('update_detalle',[ComprasController::class, 'update_detalle']);
 
 
-Route::get('/', function () {
-    return view('dashboard');
+
+
 });
 
-// Route::get('/','DashboardController@index');
+Route::prefix('proveedores')->group(function(){
+    Route::get('/',[ProveedoresController::class, 'index']);
+    Route::get('datatable', [ProveedoresController::class, 'datatable']);
+    Route::get('crear',[ProveedoresController::class, 'create']);
+    Route::get('editar/{id}',[ProveedoresController::class, 'editar'] );
+    Route::post('store',[ProveedoresController::class, 'store']);
+    Route::post('update',[ProveedoresController::class, 'update']);
+    Route::get('destroy/{id}',[ProveedoresController::class, 'destroy']);
+    Route::get('reporte',[ProveedoresController::class, 'reporte']);
+});
 
-//Route::group(['middleware' => ['auth','authUser']], function () {
+Route::prefix('productos')->group(function(){
+    Route::get('/',[ProductosController::class, 'index']);
+    Route::get('datatable', [ProductosController::class, 'datatable']);
+    Route::get('crear',[ProductosController::class, 'create']);
+    Route::get('editar/{id}',[ProductosController::class, 'editar'] );
+    Route::post('store',[ProductosController::class, 'store']);
+    Route::post('update',[ProductosController::class, 'update']);
+    Route::post('destroy',[ProductosController::class, 'destroy']);
+    Route::get('reporte',[ProductosController::class, 'reporte']);
+});
 
-    Route::prefix('compras')->group(function(){
-        Route::get('/',[ComprasController::class, 'index']);
-        Route::get('datatable', [ComprasController::class, 'datatable']);
-        Route::get('crear',[ComprasController::class, 'create']);
-        Route::get('editar/{id}',[ComprasController::class, 'editar'] );
-        Route::post('store',[ComprasController::class, 'store']);
-        Route::post('update',[ComprasController::class, 'update']);
-        Route::get('destroy/{id}',[ComprasController::class, 'destroy']);
-        Route::get('reporte',[ComprasController::class, 'reporte']);
-        Route::post('store_compra',[ComprasController::class, 'store_compra']);
-        Route::get('excel/{id}',[ComprasController::class, 'excel'] );
-
-
-    });
-
-    Route::prefix('proveedores')->group(function(){
-        Route::get('/',[ProveedoresController::class, 'index']);
-        Route::get('datatable', [ProveedoresController::class, 'datatable']);
-        Route::get('crear',[ProveedoresController::class, 'create']);
-        Route::get('edit/{id}',[ProveedoresController::class, 'edit'] );
-        Route::post('store',[ProveedoresController::class, 'store']);
-        Route::post('update',[ProveedoresController::class, 'update']);
-        Route::get('destroy/{id}',[ProveedoresController::class, 'destroy']);
-        Route::get('reporte',[ProveedoresController::class, 'reporte']);
-    });
-
-    Route::prefix('productos')->group(function(){
-        Route::get('/',[ProductosController::class, 'index']);
-        Route::get('datatable', [ProductosController::class, 'datatable']);
-        Route::get('crear',[ProductosController::class, 'create']);
-        Route::get('edit/{id}',[ProductosController::class, 'edit'] );
-        Route::post('store',[ProductosController::class, 'store']);
-        Route::post('update',[ProductosController::class, 'update']);
-        Route::get('destroy/{id}',[ProductosController::class, 'destroy']);
-        Route::get('reporte',[ProductosController::class, 'reporte']);
-    });
-
-//});//Cierre de middleware
-
-
+Route::prefix('usuarios')->group(function(){
+    Route::get('/',[UsuariosController::class, 'index']);
+    Route::get('datatable', [UsuariosController::class, 'datatable']);
+    Route::post('/reportepdf',[UsuariosController::class, 'reportepdf']);
+    Route::get('create',[UsuariosController::class, 'create']);
+    Route::get('edit/{id}',[UsuariosController::class, 'edit'] );
+    Route::post('store',[UsuariosController::class, 'store']);
+    Route::post('update',[UsuariosController::class, 'update']);
+    Route::get('destroy/{id}',[UsuariosController::class, 'destroy']);
+});
 
 Route::group(['prefix' => 'basic-ui'], function(){
     Route::get('accordions', function () { return view('pages.basic-ui.accordions'); });
@@ -111,39 +118,39 @@ Route::group(['prefix' => 'tables'], function(){
     Route::get('sortable-table', function () { return view('pages.tables.sortable-table'); });
 });
 
-Route::get('notifications', function () {
+    Route::get('notifications', function () {
     return view('pages.notifications.index');
-});
+    });
 
-Route::group(['prefix' => 'icons'], function(){
+    Route::group(['prefix' => 'icons'], function(){
     Route::get('material', function () { return view('pages.icons.material'); });
     Route::get('flag-icons', function () { return view('pages.icons.flag-icons'); });
     Route::get('font-awesome', function () { return view('pages.icons.font-awesome'); });
     Route::get('simple-line-icons', function () { return view('pages.icons.simple-line-icons'); });
     Route::get('themify', function () { return view('pages.icons.themify'); });
-});
+    });
 
-Route::group(['prefix' => 'maps'], function(){
+    Route::group(['prefix' => 'maps'], function(){
     Route::get('vector-map', function () { return view('pages.maps.vector-map'); });
     Route::get('mapael', function () { return view('pages.maps.mapael'); });
     Route::get('google-maps', function () { return view('pages.maps.google-maps'); });
-});
+    });
 
-Route::group(['prefix' => 'user-pages'], function(){
+    Route::group(['prefix' => 'user-pages'], function(){
     Route::get('login', function () { return view('pages.user-pages.login'); });
     Route::get('login-2', function () { return view('pages.user-pages.login-2'); });
     Route::get('multi-step-login', function () { return view('pages.user-pages.multi-step-login'); });
     Route::get('register', function () { return view('pages.user-pages.register'); });
     Route::get('register-2', function () { return view('pages.user-pages.register-2'); });
     Route::get('lock-screen', function () { return view('pages.user-pages.lock-screen'); });
-});
+    });
 
-Route::group(['prefix' => 'error-pages'], function(){
+    Route::group(['prefix' => 'error-pages'], function(){
     Route::get('error-404', function () { return view('pages.error-pages.error-404'); });
     Route::get('error-500', function () { return view('pages.error-pages.error-500'); });
-});
+    });
 
-Route::group(['prefix' => 'general-pages'], function(){
+    Route::group(['prefix' => 'general-pages'], function(){
     Route::get('blank-page', function () { return view('pages.general-pages.blank-page'); });
     Route::get('landing-page', function () { return view('pages.general-pages.landing-page'); });
     Route::get('profile', function () { return view('pages.general-pages.profile'); });
@@ -155,28 +162,14 @@ Route::group(['prefix' => 'general-pages'], function(){
     Route::get('search-results', function () { return view('pages.general-pages.search-results'); });
     Route::get('portfolio', function () { return view('pages.general-pages.portfolio'); });
     Route::get('user-listing', function () { return view('pages.general-pages.user-listing'); });
-});
+    });
 
-Route::group(['prefix' => 'ecommerce'], function(){
+    Route::group(['prefix' => 'ecommerce'], function(){
     Route::get('invoice', function () { return view('pages.ecommerce.invoice'); });
     Route::get('invoice-2', function () { return view('pages.ecommerce.invoice-2'); });
     Route::get('pricing', function () { return view('pages.ecommerce.pricing'); });
     Route::get('product-catalogue', function () { return view('pages.ecommerce.product-catalogue'); });
     Route::get('project-list', function () { return view('pages.ecommerce.project-list'); });
     Route::get('orders', function () { return view('pages.ecommerce.orders'); });
+    });
 });
-
-// For Clear cache
-Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
-    return "Cache is cleared";
-});
-
-// 404 for undefined routes
-Route::any('/{page?}',function(){
-    return View::make('pages.error-pages.error-404');
-})->where('page','.*');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

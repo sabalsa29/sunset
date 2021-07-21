@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard');
+    }
+
+    public function root(Request $request)
+    {
+        return redirect('/login');
     }
 }

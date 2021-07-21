@@ -11,7 +11,7 @@
 
   <<meta name="_token" content="{{ csrf_token() }}">
 
-  <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+  <link rel="shortcut icon" href="{{ asset('images/sunset.jpg') }}">
 
   <!-- plugin css -->
   {!! Html::style('assets/plugins/@mdi/font/css/materialdesignicons.min.css') !!}
@@ -33,8 +33,8 @@
 
     @include('layout.header')
     <div class="container-fluid page-body-wrapper">
-      @include('layout.sidebar')
-      <div class="main-panel">
+      <!--@include('layout.sidebar')-->
+      <div class="main-panel col-lg-12">
         <div class="content-wrapper">
           @yield('content')
         </div>

@@ -28,7 +28,16 @@
                 <tbody>
                     @foreach ($proveedores as $proveedor)
                   <tr>
-                    <td> </td>
+                    <td>
+                        <form action="{{url('proveedores/destroy') }}" method="post">
+                            @csrf
+                            <a href="/proveedores/editar/{{ Hashids::encode($proveedor->id) }}"> <i class="mdi mdi-grease-pencil"></i> </a>
+                            <button type="button" class="btn-danger " data-original-title="" title="" onclick="confirm('{{ "¿Estás seguro de eliminar el Producto?" }}') ? this.parentElement.submit() : ''">
+                                <i class="mdi mdi-delete"> </i>
+                            </button>
+                        {!! Form::hidden("id", $proveedor->id) !!}
+                        </form>
+                    </td>
                     <td> {{ $proveedor->codigo }}</td>
                     <td> {{ $proveedor->nombre }}</td>
                     <td> {{ $proveedor->email }}</td>

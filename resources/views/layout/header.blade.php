@@ -2,19 +2,16 @@
 
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-    <a class="navbar-brand brand-logo" href="{{ url('/') }}">
-      <img src="{{ url('assets/images/logo.svg') }}" alt="logo" /> </a>
-    <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}">
-      <img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /> </a>
+    <a class="logo logo-light" style="margin: 3%" href="{{ url('/') }}">
+        <img src="{{ url('assets/images/sunset.jpg') }}" alt="logo"  height="45" />
+    </a>
+
   </div>
 
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-      <span class="mdi mdi-menu"></span>
-    </button>
     <ul class="navbar-nav navbar-nav-left ">
       <li class="nav-item d-none d-xl-flex">
-        <a href="/compras" class="nav-link">Compras</a>
+        <a href="/compras" class="nav-link">Programacion</a>
       </li>
 
       <li class="nav-item dropdown ">
@@ -27,12 +24,15 @@
             <a href="/productos" class="dropdown-item"> <i class="mdi mdi-package-variant"></i> Productos</a>
         </div>
       </li>
+      <li class="nav-item d-none d-xl-flex">
+        <a href="/usuarios" class="nav-link" style="float: right">Usuarios</a>
+      </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item dropdown d-none d-xl-inline-block">
         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-          <span class="profile-text d-none d-md-inline-flex">Richard V.Welsh !</span>
-          <img class="img-xs rounded-circle" src="{{ url('assets/images/faces/face8.jpg') }}" alt="Profile image"> </a>
+          <span class="profile-text d-none d-md-inline-flex">{{ Auth::user()->nombre }}</span>
+          <img class="img-xs rounded-circle" src="{{ url('assets/images/faces/icono_mujer.png') }}" alt="Profile image"> </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
           <a class="dropdown-item p-0">
             <div class="d-flex border-bottom w-100 justify-content-center">
@@ -47,46 +47,15 @@
               </div>
             </div>
           </a>
-          <a class="dropdown-item mt-2"> Manage Accounts </a>
-          <a class="dropdown-item"> Change Password </a>
-          <a class="dropdown-item"> Check Inbox </a>
-          <a class="dropdown-item"> Sign Out </a>
+          <a class="dropdown-item"> Cambiar Contraseña </a>
+          <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle mr-1 text-muted"></i> <span class="align-middle">Cerrar Session</span></a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
         </div>
       </li>
     </ul>
-     <!-- Avatar -->
-     <a
-     class="dropdown-toggle d-flex align-items-center hidden-arrow"
-     href="#"
-     id="navbarDropdownMenuLink"
-     role="button"
-     data-mdb-toggle="dropdown"
-     aria-expanded="false"
-   >
-     <img
-       src="https://mdbootstrap.com/img/new/avatars/2.jpg"
-       class="rounded-circle"
-       height="25"
-       alt=""
-       loading="lazy"
-     />
-   </a>
-   <ul
-     class="dropdown-menu dropdown-menu-end"
-     aria-labelledby="navbarDropdownMenuLink"
-   >
-     <li>
-       <a class="dropdown-item" href="#">My profile</a>
-     </li>
-     <li>
-       <a class="dropdown-item" href="#">Settings</a>
-     </li>
-     <li>
-       <a class="dropdown-item" href="#">Logout</a>
-     </li>
-   </ul>
   </div>
-
 </nav>
 
 

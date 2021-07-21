@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Compras;
+use App\Models\Compras_detalles;
+use Hashids;
 class ProductosController extends Controller
 {
     /**
@@ -73,9 +76,17 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editar($hash)
     {
-        //
+        $id = Hashids::decode($hash);
+        $producto   = Productos::find($id[0]);
+
+
+        $tipo           = config('sistema.tipo_productos');
+        $categorias     = config('sistema.categorias');
+
+        return view('productos.editar', compact('producto', 'tipo', 'categorias'));
+        //dd($producto);
     }
 
     /**
@@ -85,9 +96,18 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $producto   = Productos::find($request->id);
+
+        $producto->tipo = $request->tipo;
+        $producto->categoria    = $request->categoria_id;
+        $producto->descripcion  = $request->descripcion;
+        $producto->save();
+
+        Alert::success('Producto', 'Actualizado Correctamente');
+        return redirect('productos');
+        //dd($request->all());
     }
 
     /**
@@ -96,8 +116,22 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //dd($request->all());
+
+        $cantidad   = Compras_detalles::where('producto_id', $request->id)->count();
+
+        if($cantidad>0){
+            Alert::warning('Producto', 'No puede Eliminarse');
+            return redirect()->back();
+        }else{
+
+            $producto   = Productos::find($request->id);
+            $producto->delete();
+            Alert::success('Producto', 'Eliminado Correctamente');
+            return redirect()->back();
+        }
+        return redirect()->back();
     }
 }

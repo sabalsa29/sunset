@@ -11,7 +11,7 @@
             {!! Html::link('#','Agregar Programacion',array('class'=>"btn btn-primary ripple m-1 ",'style'=>'margin-bottom:40px', 'data-toggle' => 'modal', 'data-target' => '#modalAddCompra'))!!}
 
             <hr>
-            <h4 class="card-title">Compras</h4>
+            <h4 class="card-title">Programacion de Pagos</h4>
 
             <div class="table-responsive">
                 <table class="table table-hover" >
@@ -22,7 +22,6 @@
                             <th> Fecha Hasta   </th>
                             <th> Comentario </th>
                             <th> Estatus </th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -34,6 +33,7 @@
                                     <td>{{$compra->fecha_del  }}</td>
                                     <td>{{$compra->fecha_hasta  }}</td>
                                     <td>{{$compra->comentario  }}</td>
+
                                     <td>{{$compra->estatus  }}</td>
                                 </tr>
                             @endforeach
@@ -83,8 +83,10 @@
 </div>
 @endsection
 
+
 @push('plugin-scripts')
 @endpush
 
 @push('custom-scripts')
 @endpush
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>

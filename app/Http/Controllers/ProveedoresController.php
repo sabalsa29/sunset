@@ -82,9 +82,13 @@ class ProveedoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editar($hash)
     {
-        //
+        $id = Hashids::decode($hash);
+        $proveedor  = Proveedores::find($id[0]);
+
+        return view('proveedores.editar', compact('proveedor'));
+        dd($proveedor);
     }
 
     /**
@@ -94,9 +98,18 @@ class ProveedoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $proveedor  = Proveedores::find($request->id);
+
+        $proveedor->nombre      = $request->nombre;
+        $proveedor->email       = $request->correo;
+        $proveedor->telefono    = $request->telefono;
+        $proveedor->domicilio   = $request->domicilio;
+        $proveedor->save();
+
+        Alert::success('Proveedor','Actualizado Correctamente');
+        return redirect('proveedores');
     }
 
     /**
