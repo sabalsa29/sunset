@@ -4,6 +4,8 @@
     "version": "1.0.0",
     "description": "",
     "author": "Themesbrand",
+
+
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -26,5 +28,8 @@
     },
     "dependencies": {
         "perfect-scrollbar": "^1.5.2"
-    }
+    },
+    "engines": {
+        "npm": "~1.0.20"
+      }
 }
