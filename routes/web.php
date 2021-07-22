@@ -23,9 +23,6 @@ Route::prefix('compras')->group(function(){
     Route::get('excel/{id}',[ComprasController::class, 'excel'] );
     Route::post('update_detalle',[ComprasController::class, 'update_detalle']);
 
-
-
-
 });
 
 Route::prefix('proveedores')->group(function(){
@@ -55,7 +52,7 @@ Route::prefix('usuarios')->group(function(){
     Route::get('datatable', [UsuariosController::class, 'datatable']);
     Route::post('/reportepdf',[UsuariosController::class, 'reportepdf']);
     Route::get('create',[UsuariosController::class, 'create']);
-    Route::get('edit/{id}',[UsuariosController::class, 'edit'] );
+    Route::get('editar/{id}',[UsuariosController::class, 'editar'] );
     Route::post('store',[UsuariosController::class, 'store']);
     Route::post('update',[UsuariosController::class, 'update']);
     Route::get('destroy/{id}',[UsuariosController::class, 'destroy']);

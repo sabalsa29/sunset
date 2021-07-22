@@ -81,23 +81,27 @@ class UsuariosController extends Controller
         return redirect('usuarios');
     }
 
-    public function edit($hash)
+    public function editar($hash)
     {
 
         $id                     = Hashids::decode($hash);
         $usuario                = Usuarios::find($id)[0];
-        $departamentos          = UsuariosDepartamentos::pluck('descripcion','id');
-        $empresas               = Transportistas::where('estatus',1)->pluck('nombre','id');
-        $empresas_seleccionadas =explode(',',$usuario->transportistas_permitido);
-
-        return view('usuarios.edit',compact('id','usuario','departamentos','empresas_seleccionadas','empresas'));
+        $departamentos  = [
+            1=>'RH',
+            2=>'Soporte'
+        ];
+        $centros  = [
+            1=>'Saladita',
+            2=>'Escuinapan'
+        ];
+        return view('usuarios.editar',compact('id','usuario','departamentos','centros'));
 
     }
 
 
     public function update(Request $req)
     {
-
+        //dd($req->all());
         $usuario = Usuarios::find($req->id);
 
         if(!empty( trim($req->password) )){
@@ -116,27 +120,19 @@ class UsuariosController extends Controller
         }
 
         Usuarios::where('id',$req->id)->update(array(
-            'encargado_departamento'    => ($req['encargado_departamento'])? $req['encargado_departamento']:0,
+            //'encargado_departamento'    => ($req['encargado_departamento'])? $req['encargado_departamento']:0,
             'nombre'                    => $req['nombre'],
-            'transportistas_permitido'  => ($req->transportistas_permitido !=null)?implode(',', $req->transportistas_permitido):0,
-            'puesto'                    => $req['puesto'],
-            'transportistas_actual'     => $req['transportistas_actual'],
+            'centro'                    => $req['centro'],
             'departamento'              => $req['departamento'],
             'email'                     => $req['email'],
-            //'password'                  => Hash::make($req['password']),
-            'primer_contacto_calidad'   => ($req['primer_contacto_calidad'])?1:0,
-            'atiende_reportes'          => ($req['atiende_reportes'])?1:0
-
         ));
-
-        $permisos = $req->except('_method','_token','id','encargado_departamento','nombre','transportistas_permitido','puesto',
-      'transportistas_actual','departamento','email','password','primer_contacto_calidad','atiende_reportes');
-        $usuario->borrar_permisos();
-        foreach($permisos as $permiso => $valor) {
-             if ($valor != 0 ) {
-                  $usuario->crear_permiso($usuario->id,$permiso);
-             }
-         }
+        //$permisos = $req->except('_method','_token','id','nombre','centro','departamento','email','password');
+        //$usuario->borrar_permisos();
+        //foreach($permisos as $permiso => $valor) {
+        //     if ($valor != 0 ) {
+        //          $usuario->crear_permiso($usuario->id,$permiso);
+        //     }
+        // }
 
         Alert::success('Usuario', 'Actualizado Correctamente ');
 

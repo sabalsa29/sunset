@@ -79,6 +79,7 @@ class ComprasController extends Controller
         $id     = Hashids::decode($hash);
         $compra = Compras::find($id[0]);
         $cantidad           = Compras_detalles::where('compra_id', $compra->id)->count();
+        //dd($compra, $cantidad);
         $cantidad_2         = Pagos::where('programacion_id', $compra->id)->count();
         if($cantidad>0){
             $compra_detalles    = Compras_detalles::where('compra_id', $compra->id)->get();
@@ -91,10 +92,10 @@ class ComprasController extends Controller
             $pagos              = Pagos::where('programacion_id', $compra->id)->get();
             $total_programacion_pagado = $pagos->sum('cantidad');
         }else{
-            $compra_detalles =0;
+            $pagos =0;
             $total_programacion_pagado= 0;
         }
-        //dd($total_programacion_pagado);
+        //dd($compra_detalles);
         $proveedores    = Proveedores::where('estatus',1)->pluck('nombre','id');
         $productos      = Productos::where('estatus',1)->pluck('descripcion','id');
         $empresas   =[
