@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use function Ramsey\Uuid\v1;
+
 class HomeController extends Controller
 {
     /**
@@ -29,5 +31,9 @@ class HomeController extends Controller
     public function root(Request $request)
     {
         return redirect('/login');
+    }
+
+    public function prueba(){
+        return view('prueba');
     }
 }

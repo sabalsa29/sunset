@@ -9,6 +9,8 @@ Auth::routes();
 Route::get('/', 'HomeController@root');
 Route::group(['middleware' => ['auth']], function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/prueba', [App\Http\Controllers\HomeController::class, 'prueba'])->name('prueba');
+
 
 Route::prefix('compras')->group(function(){
     Route::get('/',[ComprasController::class, 'index']);
