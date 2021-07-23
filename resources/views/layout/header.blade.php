@@ -11,7 +11,7 @@
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
     <ul class="navbar-nav navbar-nav-left ">
       <li class="nav-item d-none d-xl-flex">
-        <a href="/compras" class="nav-link">Programacion</a>
+        <a href="{!! url('/compras') !!}" class="nav-link">Programacion</a>
       </li>
 
       <li class="nav-item dropdown ">
@@ -20,8 +20,8 @@
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Catalogos</a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown pt-3" aria-labelledby="topnav-pages">
 
-            <a href="{!! url('proveedores') !!}" class="dropdown-item arrow-down"> <i class="mdi mdi-account-multiple"></i> Proveedores</a>
-            <a href="{!! url('productos') !!}" class="dropdown-item"> <i class="mdi mdi-package-variant"></i> Productos</a>
+            <a href="{!! url('/proveedores') !!}" class="dropdown-item arrow-down"> <i class="mdi mdi-account-multiple"></i> Proveedores</a>
+            <a href="{!! url('/productos') !!}" class="dropdown-item"> <i class="mdi mdi-package-variant"></i> Productos</a>
         </div>
       </li>
       <li class="nav-item d-none d-xl-flex">
