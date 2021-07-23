@@ -13,7 +13,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/prueba', [App\Http\Controllers\HomeController::class, 'prueba'])->name('prueba');
 
 
-Route::prefix('compras')->group(function(){
+Route::group(['prefix' => '/compras'],function () {
+
     Route::get('/',[ComprasController::class, 'index']);
     Route::get('datatable', [ComprasController::class, 'datatable']);
     Route::get('crear',[ComprasController::class, 'create']);
@@ -28,9 +29,9 @@ Route::prefix('compras')->group(function(){
 
 });
 
-Route::prefix('proveedores')->group(function(){
-    Route::get('/',[ProveedoresController::class, 'index']);
+Route::prefix('/proveedores')->group(function(){
 
+    Route::get('/',[ProveedoresController::class, 'index']);
     Route::get('datatable', [ProveedoresController::class, 'datatable']);
     Route::get('crear',[ProveedoresController::class, 'create']);
     Route::get('editar/{id}',[ProveedoresController::class, 'editar'] );
@@ -40,7 +41,8 @@ Route::prefix('proveedores')->group(function(){
     Route::get('reporte',[ProveedoresController::class, 'reporte']);
 });
 
-Route::prefix('productos')->group(function(){
+Route::prefix('/productos')->group(function(){
+
     Route::get('/',[ProductosController::class, 'index']);
     Route::get('datatable', [ProductosController::class, 'datatable']);
     Route::get('crear',[ProductosController::class, 'create']);
@@ -51,7 +53,8 @@ Route::prefix('productos')->group(function(){
     Route::get('reporte',[ProductosController::class, 'reporte']);
 });
 
-Route::prefix('usuarios')->group(function(){
+Route::prefix('/usuarios')->group(function(){
+
     Route::get('/',[UsuariosController::class, 'index']);
     Route::get('datatable', [UsuariosController::class, 'datatable']);
     Route::post('/reportepdf',[UsuariosController::class, 'reportepdf']);
