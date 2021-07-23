@@ -40,7 +40,7 @@
         </form>
       </div>
 
-      <p class="footer-text text-center">Sunset Tropical de la Costa Grande.</p>
+      <p class="footer-text text-center">Sunset Tropical de la Costa Grandeee.</p>
     </div>
   </div>
 </div>
