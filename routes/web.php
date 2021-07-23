@@ -187,11 +187,6 @@ Route::group(['prefix' => 'tables'], function(){
 
     });
     Route::group(['prefix'=>'/compras'], function(){
-        //Route::get('/',[ComprasController::class, 'index']);
-        //Route::get('crear', [ComprasController::class, 'create']);
-        //Route::post('store',[ComprasController::class, 'store']);
-
-
         Route::get('/',[ComprasController::class, 'index']);
         Route::get('datatable', [ComprasController::class, 'datatable']);
         Route::get('crear',[ComprasController::class, 'create']);
