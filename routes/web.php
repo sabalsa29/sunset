@@ -3,6 +3,7 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\DepartamentosController;
 use App\Http\Controllers\HomeController;
 
 Auth::routes();
@@ -171,4 +172,7 @@ Route::group(['prefix' => 'tables'], function(){
     Route::get('project-list', function () { return view('pages.ecommerce.project-list'); });
     Route::get('orders', function () { return view('pages.ecommerce.orders'); });
     });
+
+    Route::get('/departamentos', [App\Http\Controllers\DepartamentosController::class, 'index'])->name('index');
+
 });
