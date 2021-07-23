@@ -30,6 +30,7 @@ Route::prefix('compras')->group(function(){
 
 Route::prefix('proveedores')->group(function(){
     Route::get('/',[ProveedoresController::class, 'index']);
+
     Route::get('datatable', [ProveedoresController::class, 'datatable']);
     Route::get('crear',[ProveedoresController::class, 'create']);
     Route::get('editar/{id}',[ProveedoresController::class, 'editar'] );
@@ -173,6 +174,14 @@ Route::group(['prefix' => 'tables'], function(){
     Route::get('orders', function () { return view('pages.ecommerce.orders'); });
     });
 
-    Route::get('/departamentos', [App\Http\Controllers\DepartamentosController::class, 'index'])->name('index');
+    //Route::get('/departamentos', [App\Http\Controllers\DepartamentosController::class, 'index'])->name('index');
+    //Route::get('departamentos', [App\Http\Controllers\DepartamentosController::class, 'index'])->name('index');
+
+    Route::group(['prefix' => '/departamentos'],function () {
+        Route::get('/',[DepartamentosController::class, 'index']);
+        Route::get('/crear',[DepartamentosController::class, 'crear']);
+        Route::post('/store',[DepartamentosController::class, 'store']);
+
+    });
 
 });
