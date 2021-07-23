@@ -13,21 +13,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/prueba', [App\Http\Controllers\HomeController::class, 'prueba'])->name('prueba');
 
 
-Route::group(['prefix' => '/compras'],function () {
+//Route::group(['prefix' => '/compras'],function () {
 
-    Route::get('/',[ComprasController::class, 'index']);
-    Route::get('datatable', [ComprasController::class, 'datatable']);
-    Route::get('crear',[ComprasController::class, 'create']);
-    Route::get('editar/{id}',[ComprasController::class, 'editar'] );
-    Route::post('store',[ComprasController::class, 'store']);
-    Route::post('update',[ComprasController::class, 'update']);
-    Route::get('destroy/{id}',[ComprasController::class, 'destroy']);
-    Route::get('reporte',[ComprasController::class, 'reporte']);
-    Route::post('store_compra',[ComprasController::class, 'store_compra']);
-    Route::get('excel/{id}',[ComprasController::class, 'excel'] );
-    Route::post('update_detalle',[ComprasController::class, 'update_detalle']);
+  //  Route::get('/',[ComprasController::class, 'index']);
+    //Route::get('datatable', [ComprasController::class, 'datatable']);
+    //Route::get('crear',[ComprasController::class, 'create']);
+    //Route::get('editar/{id}',[ComprasController::class, 'editar'] );
+    //Route::post('store',[ComprasController::class, 'store']);
+    //Route::post('update',[ComprasController::class, 'update']);
+    //Route::get('destroy/{id}',[ComprasController::class, 'destroy']);
+    //Route::get('reporte',[ComprasController::class, 'reporte']);
+    //Route::post('store_compra',[ComprasController::class, 'store_compra']);
+    //Route::get('excel/{id}',[ComprasController::class, 'excel'] );
+    //Route::post('update_detalle',[ComprasController::class, 'update_detalle']);
 
-});
+//});
 
 Route::prefix('/proveedores')->group(function(){
 
@@ -184,6 +184,12 @@ Route::group(['prefix' => 'tables'], function(){
         Route::get('/',[DepartamentosController::class, 'index']);
         Route::get('/crear',[DepartamentosController::class, 'crear']);
         Route::post('/store',[DepartamentosController::class, 'store']);
+
+    });
+    Route::group(['prefix'=>'/compras'], function(){
+        Route::get('/',[ComprasController::class, 'index']);
+        Route::get('crear', [ComprasController::class, 'create']);
+        Route::post('store',[ComprasController::class, 'store']);
 
     });
 

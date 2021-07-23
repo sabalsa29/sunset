@@ -27,6 +27,6 @@ class DepartamentosController extends Controller
         $departamento->save();
 
         Alert::success('Departamento','Creado Correctamente');
-        return redirect('/departamentos');
+        return redirect('departamentos');
     }
 }
