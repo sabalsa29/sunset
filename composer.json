@@ -62,6 +62,10 @@
             "dont-discover": []
         }
     },
+    "suggest": {
+        "ext-bcmatch": "Required to use BC Math arbitrary precision mathematics (*).",
+        "ext-gmp": "Required to use GNU multiple precision mathematics (*)."
+      },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
