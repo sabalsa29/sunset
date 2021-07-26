@@ -9,6 +9,14 @@
 
 </head>
 <body>
+    @php
+        //dd('compras/editar/'. Hashids::encode(12));
+        $valor_1 = Hashids::encode(12);
+        $valor_2 = Hashids::encode(22);
+        $valor_3 = Hashids::encode(32);
+        $valor_4 = Hashids::encode(42);
+
+    @endphp
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Sunset</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +52,25 @@
           </form>
         </div>
       </nav>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Valor 1</th>
+            <th scope="col">Valor 2</th>
+            <th scope="col">Valor 3</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td>{{ $valor_1 }}</td>
+                <td>{{ $valor_2 }}</td>
+                <td>{{ $valor_3 }}</td>
+                <td>{{ $valor_4 }}</td>
+          </tr>
+        </tbody>
+      </table>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

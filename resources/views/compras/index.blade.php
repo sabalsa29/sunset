@@ -29,6 +29,7 @@
                         <tbody>
                             @foreach ($compras as $compra)
                                 <tr>
+
                                     <td>
                                         <a href="{{ url('compras/editar/'. Hashids::encode($compra->id)) }}" > <i class="mdi mdi-folder"></i> </a>
                                         <a href="{{ url('compras/excel/'. Hashids::encode($compra->id)) }}" > <i class="mdi mdi-file-excel"></i> </a>
