@@ -2,7 +2,9 @@
 
 @push('plugin-styles')
 @endpush
-
+@php
+    use Vinkla\Hashids\Facades\Hashids;
+@endphp
 @section('content')
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">

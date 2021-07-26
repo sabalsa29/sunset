@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Departamentos;
 use Illuminate\Http\Request;
 use Alert;
+use Vinkla\Hashids\Facades\Hashids;
+
 
 class DepartamentosController extends Controller
 {
