@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Alert;
 use App\Models\Compras;
 use App\Models\Compras_detalles;
-use Hashids;
+use Vinkla\Hashids\Facades\Hashids;
+
 class ProductosController extends Controller
 {
     /**

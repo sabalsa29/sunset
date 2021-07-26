@@ -10,10 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 use App\Models\Compras;
 use App\Models\Pagos;
-use Hashids;
+//use Hashids\Hashids;
+//use Hashids;
+use Vinkla\Hashids\Facades\Hashids;
 use Date;
 use Auth;
-use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 class ComprasController extends Controller
 {
